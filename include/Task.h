@@ -24,7 +24,7 @@ public:
 	taskID getID() const { return id; }
 	const std::string& getName() const { return name; }
 	const std::string& getDescription() const { return description; }
-	const Date getDate() const { return dueDate; }
+	const Date& getDate() const { return dueDate; }
 	Status getStatus() const { return currentStatus; }
 
 	Task(const std::string& n, const std::string& d, const Date& dd, Status cs) :
