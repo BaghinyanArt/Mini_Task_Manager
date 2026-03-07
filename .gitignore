@@ -1,0 +1,28 @@
+# Build directories
+build/
+out/
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Visual Studio files
+.vs/
+*.vcxproj*
+*.sln
+
+# Compiled binaries
+*.exe
+*.out
+*.o
+*.obj
+
+# Debug / temporary files
+*.log
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
