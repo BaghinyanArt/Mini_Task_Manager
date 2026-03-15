@@ -2,42 +2,34 @@
 #define TASK_H
 
 #include <string>
-#include "Date.h"
+#include <iostream>
+//#include "Date.h"
 
 enum class Status {
 	NotStarted,
-	InProcess,
 	Completed,
 };
 
-struct taskID {
-	int id;
-	
-	taskID() {
-		static int nextID = 1;
+class Task {
+	friend std::ostream& operator<<(std::ostream&, const Task&);
+public:
+	explicit Task(const std::string& n) : name(n) {
 		id = nextID++;
 	}
-};
-
-class Task {
-public:
-	taskID getID() const { return id; }
+	int getID() const { return id; }
 	const std::string& getName() const { return name; }
-	const Date& getDate() const { return dueDate; }
+	//const Date& getDate() const { return dueDate; }
 	Status getStatus() const { return currentStatus; }
 
-	Task(const std::string& n, const std::string& d, const Date& dd, Status cs) :
-		name(n), dueDate(dd), currentStatus(cs){
-	}
 	void setName(const std::string& n) { name = n; }
-	void setDate(const Date& dd) { dueDate = dd; }
+	//void setDate(const Date& dd) { dueDate = dd; }
 	void setStatus(Status cs) { currentStatus = cs; }
-
 private :
-	taskID id;
+	int id;
+	static int nextID;
 	std::string name;
-	Date dueDate;
-	Status currentStatus;
+	//Date dueDate;
+	Status currentStatus = Status::NotStarted;
 };
 
 #endif

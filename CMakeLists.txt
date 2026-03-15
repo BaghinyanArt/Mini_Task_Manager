@@ -10,4 +10,4 @@ file(GLOB SOURCES
     src/*.cpp
 )
 
-add_executable(MiniTaskManager ${SOURCES})
+add_executable(MiniTaskManager ${SOURCES} "include/Task.h" "include/Date.h" "src/Date.cpp" "include/TaskManager.h" "src/TaskManager.cpp" "src/Task.cpp")

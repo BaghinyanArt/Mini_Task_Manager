@@ -3,7 +3,7 @@
 
 #include <array>
 
-extern const array<unsigned int, 13> daysInMonth;
+extern const std::array<unsigned int, 13> daysInMonth;
 
 struct Date {
 	Date(unsigned int, unsigned int, unsigned int);
