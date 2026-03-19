@@ -13,6 +13,12 @@ bool TaskManager::checkForEmptinees() {
 	return true;
 }
 
+auto TaskManager::findTaskViaID(const int choosenID) {
+	auto it = find_if(tableOfTasks.begin(), tableOfTasks.end(), [choosenID](const Task& item) {return item.getID() == choosenID; });
+	return it;
+}
+
+
 void TaskManager::addingTask(const std::string& name) {
 
 	Task taskForAdding(name);
@@ -26,8 +32,8 @@ void TaskManager::displayingTasks() const {
 }
 
 void TaskManager::updateTask(const int choosenID) {
-		auto it = find_if(tableOfTasks.begin(), tableOfTasks.end(), [choosenID](const Task& item) {return item.getID() == choosenID; });
-		if (it != tableOfTasks.end()) {
+	auto it = findTaskViaID(choosenID);
+	if (it != tableOfTasks.end()) {
 
 			if (it->getStatus() == Status::Completed) {
 				cout << "You can not update completed task!" << endl;
@@ -48,7 +54,7 @@ void TaskManager::updateTask(const int choosenID) {
 }
 
 void TaskManager::markAsCompleted(const int choosenID) {
-		auto it = find_if(tableOfTasks.begin(), tableOfTasks.end(), [choosenID](const Task& item) {return item.getID() == choosenID; });
+	auto it = findTaskViaID(choosenID);
 		if (it != tableOfTasks.end()) {
 			it->setStatus(Status::Completed);
 			cout << "Your task was marked as completed!" << endl;

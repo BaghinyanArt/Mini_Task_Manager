@@ -17,14 +17,16 @@ int main() {
         <<"to help you organize and track your tasks."
         << "\nFor selecting one of the options enter the corresponding number." << endl;
 
-    cout << "**********************\n" << "[1] Creating task\n"
+    do {
+    cout << "**********************\n" 
+        << "[1] Creating task\n"
         << "[2] Displaying your tasks\n"
         << "[3] Update task\n"
         << "[4] Mark task as completed\n"
         << "[0] Exit\n"
         << "**********************" << endl;
+    cout << "Enter number _ ";
 
-    do {
         getline(cin, stringButton);
         button = stoi(stringButton);
 
