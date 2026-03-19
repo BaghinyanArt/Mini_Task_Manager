@@ -23,6 +23,7 @@ int main() {
         << "[2] Displaying your tasks\n"
         << "[3] Update task\n"
         << "[4] Mark task as completed\n"
+        << "[5] Remove task\n"
         << "[0] Exit\n"
         << "**********************" << endl;
     cout << "Enter number _ ";
@@ -67,6 +68,17 @@ int main() {
                 getline(cin, stringInputID);
                 inputID = stoi(stringInputID);
                 tableOfTasks.markAsCompleted(inputID);
+            }
+            break;
+        }
+        case 5: {
+            if (tableOfTasks.checkForEmptinees()) {
+                int inputID;
+                string stringInputID;
+                cout << "Enter your task ID: ";
+                getline(cin, stringInputID);
+                inputID = stoi(stringInputID);
+                tableOfTasks.removeTask(inputID);
             }
             break;
         }

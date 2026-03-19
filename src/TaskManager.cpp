@@ -18,7 +18,6 @@ auto TaskManager::findTaskViaID(const int choosenID) {
 	return it;
 }
 
-
 void TaskManager::addingTask(const std::string& name) {
 
 	Task taskForAdding(name);
@@ -62,4 +61,15 @@ void TaskManager::markAsCompleted(const int choosenID) {
 		else {
 			cout << "There is not any task with your entered ID. For information about task choose [2]nd option." << endl;
 		}
+}
+
+void TaskManager::removeTask(const int choosenID) {
+	auto it = findTaskViaID(choosenID);
+	if (it != tableOfTasks.end()) {
+		tableOfTasks.erase(it);
+		cout << "The task was removed successfully!" << endl;
+	}
+	else {
+		cout << "There is not any task with your entered ID. For information about task choose [2]nd option." << endl;
+	}
 }
