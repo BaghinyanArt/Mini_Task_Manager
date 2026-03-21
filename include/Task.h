@@ -6,7 +6,7 @@
 //#include "Date.h"
 
 enum class Status {
-	NotStarted,
+	NotStarted = 1,
 	Completed,
 };
 
