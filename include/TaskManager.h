@@ -12,6 +12,7 @@ public:
 	void updateTask(const int);
 	void markAsCompleted(const int);
 	void removeTask(const int);
+	void saveTaskToFile(const int);
 private:
 	auto findTaskViaID(const int);
 	std::vector<Task> tableOfTasks;

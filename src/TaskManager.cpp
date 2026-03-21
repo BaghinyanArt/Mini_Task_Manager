@@ -3,6 +3,9 @@
 #include <algorithm>
 #include <iterator>
 #include <string>
+#include <fstream>
+#include <cstdlib>
+#include <filesystem>
 using namespace std;
 
 bool TaskManager::checkForEmptinees() {
@@ -13,8 +16,8 @@ bool TaskManager::checkForEmptinees() {
 	return true;
 }
 
-auto TaskManager::findTaskViaID(const int choosenID) {
-	auto it = find_if(tableOfTasks.begin(), tableOfTasks.end(), [choosenID](const Task& item) {return item.getID() == choosenID; });
+auto TaskManager::findTaskViaID(const int chosenID) {
+	auto it = find_if(tableOfTasks.begin(), tableOfTasks.end(), [chosenID](const Task& item) {return item.getID() == chosenID; });
 	return it;
 }
 
@@ -30,8 +33,8 @@ void TaskManager::displayingTasks() const {
 		copy(tableOfTasks.begin(), tableOfTasks.end(), ostream_iterator<Task>(cout, "\n"));
 }
 
-void TaskManager::updateTask(const int choosenID) {
-	auto it = findTaskViaID(choosenID);
+void TaskManager::updateTask(const int chosenID) {
+	auto it = findTaskViaID(chosenID);
 	if (it != tableOfTasks.end()) {
 
 			if (it->getStatus() == Status::Completed) {
@@ -52,8 +55,8 @@ void TaskManager::updateTask(const int choosenID) {
 		}
 }
 
-void TaskManager::markAsCompleted(const int choosenID) {
-	auto it = findTaskViaID(choosenID);
+void TaskManager::markAsCompleted(const int chosenID) {
+	auto it = findTaskViaID(chosenID);
 		if (it != tableOfTasks.end()) {
 			it->setStatus(Status::Completed);
 			cout << "Your task was marked as completed!" << endl;
@@ -63,8 +66,8 @@ void TaskManager::markAsCompleted(const int choosenID) {
 		}
 }
 
-void TaskManager::removeTask(const int choosenID) {
-	auto it = findTaskViaID(choosenID);
+void TaskManager::removeTask(const int chosenID) {
+	auto it = findTaskViaID(chosenID);
 	if (it != tableOfTasks.end()) {
 		tableOfTasks.erase(it);
 		cout << "The task was removed successfully!" << endl;
@@ -72,4 +75,27 @@ void TaskManager::removeTask(const int choosenID) {
 	else {
 		cout << "There is not any task with your entered ID. For information about task choose [2]nd option." << endl;
 	}
+}
+
+void TaskManager::saveTaskToFile(const int chosenID) {
+	//for each execution we can keep tasks in file 
+	ofstream outputInFile("../../../data/tasks.txt", ios::out | ios::app);
+
+	if (!outputInFile) {
+		cerr << "File could not be opened" << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	auto it = findTaskViaID(chosenID);
+	if (it != tableOfTasks.end()) {
+		cout << "Saving task..." << endl;
+		outputInFile << it->getName() << "|" << static_cast<int>(it->getStatus()) << "\n";
+		cout << "This path shows you from where the program executes. You work with data/tasks.txt!" << endl;
+		cout << filesystem::current_path() << endl;
+		cout << "Your task was saved in file successfully!" << endl;
+	}
+	else {
+		cout << "There is not any task with your entered ID. For information about task choose [2]nd option." << endl;
+	}
+	outputInFile.close();
 }

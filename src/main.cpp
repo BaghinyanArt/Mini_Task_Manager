@@ -10,7 +10,7 @@ int main() {
     //for using getline
     string stringButton;
     TaskManager tableOfTasks;
-
+    
     cout << "*****TASK MANAGER*****";
         
     cout << "\nWelcome to task manager a simple console application designed "
@@ -24,6 +24,7 @@ int main() {
         << "[3] Update task\n"
         << "[4] Mark task as completed\n"
         << "[5] Remove task\n"
+        << "[6] Save task to file\n"
         << "[0] Exit\n"
         << "**********************" << endl;
     cout << "Enter number _ ";
@@ -79,6 +80,17 @@ int main() {
                 getline(cin, stringInputID);
                 inputID = stoi(stringInputID);
                 tableOfTasks.removeTask(inputID);
+            }
+            break;
+        }
+        case 6: {
+            if (tableOfTasks.checkForEmptinees()) {
+                int inputID;
+                string stringInputID;
+                cout << "Enter your task ID: ";
+                getline(cin, stringInputID);
+                inputID = stoi(stringInputID);
+                tableOfTasks.saveTaskToFile(inputID);
             }
             break;
         }
