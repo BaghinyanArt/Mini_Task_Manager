@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
 #include "TaskManager.h"
-
 using namespace std;
-
 
 int main() {
     int button;
@@ -18,17 +16,18 @@ int main() {
         << "\nFor selecting one of the options enter the corresponding number." << endl;
 
     do {
-    cout << "**********************\n" 
-        << "[1] Creating task\n"
-        << "[2] Displaying your tasks\n"
-        << "[3] Update task\n"
-        << "[4] Mark task as completed\n"
-        << "[5] Remove task\n"
-        << "[6] Save task to file\n"
-        <<"[7] Remove file content\n"
-        << "[0] Exit\n"
-        << "**********************" << endl;
-    cout << "Enter number _ ";
+        cout << "**********************\n"
+            << "[1] Creating task\n"
+            << "[2] Displaying your tasks\n"
+            << "[3] Update task\n"
+            << "[4] Mark task as completed\n"
+            << "[5] Remove task\n"
+            << "[6] Save task to file\n"
+            << "[7] Remove file content\n"
+            << "[8] Loading all tasks from file\n"
+            << "[0] Exit\n"
+            << "**********************" << endl;
+        cout << "Enter number _ ";
 
         getline(cin, stringButton);
         button = stoi(stringButton);
@@ -97,6 +96,10 @@ int main() {
         }
         case 7: {
             tableOfTasks.removeFileContent();
+            break;
+        }
+        case 8: {
+            tableOfTasks.loadFromFile();
             break;
         }
         default:

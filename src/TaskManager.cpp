@@ -6,6 +6,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <filesystem>
+#include <sstream>
 using namespace std;
 
 bool TaskManager::checkForEmptinees() {
@@ -100,7 +101,7 @@ void TaskManager::saveTaskToFile(const int chosenID) {
 	outputInFile.close();
 }
 
-void TaskManager::removeFileContent() {
+void TaskManager::removeFileContent() const{
 	//output already truncates file content
 	ofstream remove("../../../data/tasks.txt", ios::out);
 	if (!remove) {
@@ -112,4 +113,37 @@ void TaskManager::removeFileContent() {
 	cout << "The file content was removed successfully!" << endl;
 }
 
+void TaskManager::loadFromFile(){
+	cout << "After loading the tasks will be removed from file choose option [6]th for saving you chosen task in file." << endl;
+	cout << "Loading..." << endl;
+	ifstream inputTaskFromFile("../../../data/tasks.txt", ios::in);
+	if (!inputTaskFromFile) {
+		cerr << "File could not be opened" << endl;
+		exit(EXIT_FAILURE);
+	}
+	string line;
+	while (getline(inputTaskFromFile, line)) {
+		stringstream fileInfo(line);
+		string chunk;
+		getline(fileInfo, chunk, '|');
+		string name = chunk;
+		getline(fileInfo, chunk, '|');
+		int intStatus = stoi(chunk);
+		Task t(name);
+		Status status;
+		switch (intStatus) {
+			case 1: status = Status::NotStarted; break;
+			case 2: status = Status::Completed; break;
+			default: {
+				cerr << "Invalid status in file" << endl;
+				exit(EXIT_FAILURE);
+			}
+		}
+		t.setStatus(status);
+		tableOfTasks.push_back(t);
+	}
+
+	inputTaskFromFile.close();
+	this->removeFileContent();
+}
 

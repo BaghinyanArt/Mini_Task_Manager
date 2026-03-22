@@ -13,7 +13,8 @@ public:
 	void markAsCompleted(const int);
 	void removeTask(const int);
 	void saveTaskToFile(const int);
-	void removeFileContent();
+	void removeFileContent()const;
+	void loadFromFile();
 private:
 	auto findTaskViaID(const int);
 	std::vector<Task> tableOfTasks;
