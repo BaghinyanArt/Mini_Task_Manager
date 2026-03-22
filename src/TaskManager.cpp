@@ -99,3 +99,17 @@ void TaskManager::saveTaskToFile(const int chosenID) {
 	}
 	outputInFile.close();
 }
+
+void TaskManager::removeFileContent() {
+	//output already truncates file content
+	ofstream remove("../../../data/tasks.txt", ios::out);
+	if (!remove) {
+		cerr << "File could not be opened" << endl;
+		exit(EXIT_FAILURE);
+	}
+	remove.close();
+
+	cout << "The file content was removed successfully!" << endl;
+}
+
+

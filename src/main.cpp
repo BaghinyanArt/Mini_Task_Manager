@@ -25,6 +25,7 @@ int main() {
         << "[4] Mark task as completed\n"
         << "[5] Remove task\n"
         << "[6] Save task to file\n"
+        <<"[7] Remove file content\n"
         << "[0] Exit\n"
         << "**********************" << endl;
     cout << "Enter number _ ";
@@ -92,6 +93,10 @@ int main() {
                 inputID = stoi(stringInputID);
                 tableOfTasks.saveTaskToFile(inputID);
             }
+            break;
+        }
+        case 7: {
+            tableOfTasks.removeFileContent();
             break;
         }
         default:
